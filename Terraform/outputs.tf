@@ -23,6 +23,14 @@ output "bastion_public_ip" {
   value       = module.ec2.bastion_public_ip
 }
 
+output "jenkins_master_private_ip" {
+  value = module.ec2_instance.master_private_ip
+}
+
+output "jenkins_slave_private_ip" {
+  value = module.ec2_instance.slave_private_ip
+}
+
 output "alb_dns_name" {
   description = "DNS name of the application load balancer"
   value       = module.alb.alb_dns_name

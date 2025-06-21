@@ -42,7 +42,4 @@ module "alb" {
   public_subnet_ids  = module.network.public_subnet_ids
   alb_sg_id          = module.security-groups.alb_sg
   target_instance_id = module.ec2.jenkins_slave_instance_id
-  # target_instance_ids = {
-  # "app1" = module.ec2.app_instance_id
-  # }
 }
