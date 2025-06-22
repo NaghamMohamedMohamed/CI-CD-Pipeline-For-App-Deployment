@@ -18,6 +18,16 @@ variable "private_subnet_ids" {
   description = "List of private subnet IDs"
 }
 
+variable "master_private_ip" {
+  type        = string
+  description = "Private IP of Jenkins Master EC2"
+}
+
+variable "slave_private_ip" {
+  type        = string
+  description = "Private IP of Jenkins Slave EC2"
+}
+
 variable "key_name" {
   type        = string
   description = "Name of the EC2 key pair"

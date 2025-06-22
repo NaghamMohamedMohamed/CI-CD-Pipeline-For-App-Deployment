@@ -46,3 +46,13 @@ variable "ecr_repo_name" {
   description = "The ECR Repo Name"
   type = string
 }
+
+variable "master_private_ip" {
+  type        = string
+  description = "Private IP of Jenkins Master EC2"
+}
+
+variable "slave_private_ip" {
+  type        = string
+  description = "Private IP of Jenkins Slave EC2"
+}

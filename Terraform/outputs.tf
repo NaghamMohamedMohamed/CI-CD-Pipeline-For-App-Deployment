@@ -24,11 +24,11 @@ output "bastion_public_ip" {
 }
 
 output "jenkins_master_private_ip" {
-  value = module.ec2_instance.master_private_ip
+  value = var.master_private_ip
 }
 
 output "jenkins_slave_private_ip" {
-  value = module.ec2_instance.slave_private_ip
+  value = var.slave_private_ip
 }
 
 output "alb_dns_name" {

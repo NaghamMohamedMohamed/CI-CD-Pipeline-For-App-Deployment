@@ -40,6 +40,9 @@ subnets = [
 key_name        = "ssh-key"
 public_key_path = "../ssh-key.pub"
 instance_type   = "t2.micro"
+master_private_ip = "10.0.2.100" # Jenkins Master EC2
+slave_private_ip = "10.0.3.100"  # Jenkins Master EC2
+
 
 # ECR
 ecr_repo_name = "jenkins-ecr"

@@ -26,7 +26,10 @@ module "ec2" {
 
   key_name        = var.key_name
   public_key_path = var.public_key_path
-  
+  master_private_ip = var.master_private_ip
+  slave_private_ip = var.slave_private_ip
+
+
   bastion_sg_id = module.security-groups.bastion_sg
   jenkins_master_sg_id = module.security-groups.master_sg
   jenkins_slave_sg_id    = module.security-groups.slave_sg
