@@ -31,14 +31,6 @@ resource "aws_security_group" "master_sg" {
   description = "Allow web/SSH access to Jenkins"
   vpc_id      = var.vpc_id
 
-  # Allow access to Jenkins web interface Dashboard (port 8080)
-  ingress {
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   # Allow SSH access (port 22) only from the bastion security group
   ingress {
     from_port   = 22
@@ -120,7 +112,3 @@ resource "aws_security_group" "alb_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-
-
-
-
