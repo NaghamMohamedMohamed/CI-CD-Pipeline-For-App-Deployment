@@ -27,7 +27,7 @@ resource "aws_subnet" "subnets" {
   map_public_ip_on_launch = each.value.type == "public"  # Automatically assign public IP for public subnets
 
   tags = {
-    Name = each.value.name
+    Name = "${var.prefix}-${each.value.name}"
   }
 }
 
@@ -85,7 +85,7 @@ resource "aws_route_table_association" "public_rta" {
 resource "aws_eip" "nat" {
   domain = "vpc"
 
-  tags = { Name = "${var.prefix}nat-eip" }
+  tags = { Name = "${var.prefix}-nat-eip" }
 }
 
 
