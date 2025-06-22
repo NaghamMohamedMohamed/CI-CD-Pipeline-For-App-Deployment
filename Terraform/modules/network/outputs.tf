@@ -3,9 +3,15 @@ output "vpc_id" {
 }
 
 output "public_subnet_ids" {
-  value = [for s in aws_subnet.subnets : s.id if var.subnets[index(keys(aws_subnet.subnets), s.tags["Name"])].type == "public"]
+  value = [
+    aws_subnet.subnets["public-subnet-1"].id,
+    aws_subnet.subnets["public-subnet-2"].id,
+  ]
 }
 
 output "private_subnet_ids" {
-  value = [for s in aws_subnet.subnets : s.id if var.subnets[index(keys(aws_subnet.subnets), s.tags["Name"])].type == "private"]
+  value = [
+    aws_subnet.subnets["private-subnet-1"].id,
+    aws_subnet.subnets["private-subnet-2"].id,
+  ]
 }
