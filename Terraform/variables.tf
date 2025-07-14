@@ -41,12 +41,6 @@ variable "instance_type" {
   type        = string
 }
 
-# ECR
-variable "ecr_repo_name" {
-  description = "The ECR Repo Name"
-  type = string
-}
-
 variable "master_private_ip" {
   type        = string
   description = "Private IP of Jenkins Master EC2"

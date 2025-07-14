@@ -36,13 +36,6 @@ module "ec2" {
   app_sg_id = module.security-groups.app_sg
 }
 
-module "ecr" {
-  source = "./modules/ecr"
-  prefix   = var.prefix
-
-  ecr_repo_name = var.ecr_repo_name
-}
-
 # Application Load Balancer ModuleApplication
 module "alb" {
   source = "./modules/alb"

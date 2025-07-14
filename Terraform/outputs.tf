@@ -35,13 +35,3 @@ output "alb_dns_name" {
   description = "DNS name of the application load balancer"
   value       = module.alb.alb_dns_name
 }
-
-output "aws_ecr_repository_url" {
-  description = "The URL of the ECR repository"
-  value       = module.ecr.aws_ecr_repository_url
-}
-
-output "aws_ecr_repository_name" {
-  description = "Name of the ECR repo"
-  value = module.ecr.aws_ecr_repository_name
-}
