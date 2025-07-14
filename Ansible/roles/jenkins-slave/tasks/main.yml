@@ -1,0 +1,26 @@
+# Tasks file for Jenkins Slave role
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install required packages
+  apt:
+    name:
+      - openjdk-17-jdk
+      - git
+      - docker.io
+      - curl
+    state: present
+
+- name: Add ubuntu User to Docker group
+  user:
+    name: ubuntu
+    groups: docker
+    append: yes
+
+- name: Start and enable Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes

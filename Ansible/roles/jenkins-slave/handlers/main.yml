@@ -1,0 +1,5 @@
+# To restart docker service only when needed
+- name: restart docker
+  service:
+    name: docker
+    state: restarted

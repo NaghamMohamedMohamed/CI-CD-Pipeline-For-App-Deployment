@@ -1,0 +1,9 @@
+- name: Configure Jenkins Master on Ubuntu
+  hosts: jenkins_master
+  become: true
+  gather_facts: yes
+
+  roles:
+    - setup-ssh     # Ensures SSH access is configured first
+    - jenkins-master  # Jenkins Master install & config
+

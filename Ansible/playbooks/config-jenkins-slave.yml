@@ -1,0 +1,8 @@
+- name: Configure Jenkins Slave on  Ubuntu
+  hosts: jenkins_slave
+  become: true
+  gather_facts: yes
+
+  roles:
+    - setup-ssh     # Ensures SSH access is configured first
+    - jenkins-slave # Jenkins Slave install & config
