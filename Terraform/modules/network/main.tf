@@ -70,7 +70,8 @@ resource "aws_route_table" "public_rt" {
 resource "aws_route_table_association" "public_rta" {
   for_each = {
     for name, subnet in aws_subnet.subnets : name => subnet
-    if var.subnets[index(keys(aws_subnet.subnets), name)].type == "public"
+    if [for s in var.subnets : s if s.name == name][0].type == "public"
+
   }
 
   subnet_id      = each.value.id
@@ -97,7 +98,7 @@ resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat.id
   subnet_id     = aws_subnet.subnets["public-subnet-1"].id
 
-  tags          = { Name = "${var.prefix}-gateway" }
+  tags          = { Name = "${var.prefix}-nat" }
 
   depends_on = [aws_internet_gateway.igw]
 }
@@ -125,8 +126,8 @@ resource "aws_route_table" "private_rt" {
 
 resource "aws_route_table_association" "private_rta" {
   for_each = {
-    for name, subnet in aws_subnet.subnets : name => subnet
-    if var.subnets[index(keys(aws_subnet.subnets), name)].type == "private"
+    for name , subnet in aws_subnet.subnets : name => subnet
+    if [for s in var.subnets : s if s.name == name][0].type == "private"
   }
   subnet_id      = each.value.id
   route_table_id = aws_route_table.private_rt.id
