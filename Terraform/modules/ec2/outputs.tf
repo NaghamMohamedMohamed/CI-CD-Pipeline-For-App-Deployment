@@ -13,3 +13,21 @@ output "jenkins_master_instance_id" {
 output "jenkins_slave_instance_id" {
   value = aws_instance.jenkins_slave.id
 }
+
+output "nodejs_app1_id" {
+  value = aws_instance.nodejs_app1.id
+}
+
+output "nodejs_app2_id" {
+  value = aws_instance.nodejs_app2.id
+}
+
+output "nodejs_app1_private_ip" {
+  description = "Private IP of Node.js App1 EC2 instance"
+  value       = aws_instance.nodejs_app1.private_ip
+}
+
+output "nodejs_app2_private_ip" {
+  description = "Private IP of Node.js App2 EC2 instance"
+  value       = aws_instance.nodejs_app2.private_ip
+}

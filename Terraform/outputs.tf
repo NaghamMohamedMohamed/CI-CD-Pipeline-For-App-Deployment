@@ -31,6 +31,14 @@ output "jenkins_slave_private_ip" {
   value = var.slave_private_ip
 }
 
+output "nodejs_app1_private_ip" {
+  value = module.ec2.nodejs_app1_private_ip
+}
+
+output "nodejs_app2_private_ip" {
+  value = module.ec2.nodejs_app2_private_ip
+}
+
 output "alb_dns_name" {
   description = "DNS name of the application load balancer"
   value       = module.alb.alb_dns_name

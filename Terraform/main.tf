@@ -44,5 +44,7 @@ module "alb" {
   vpc_id             = module.network.vpc_id
   public_subnet_ids  = module.network.public_subnet_ids
   alb_sg_id          = module.security-groups.alb_sg
-  target_instance_id = module.ec2.jenkins_slave_instance_id
+
+  nodejs_app1_id     = module.ec2.nodejs_app1_id
+  nodejs_app2_id     = module.ec2.nodejs_app2_id
 }

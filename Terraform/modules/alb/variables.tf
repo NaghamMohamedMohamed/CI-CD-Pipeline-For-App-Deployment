@@ -18,9 +18,14 @@ variable "alb_sg_id" {
   type        = string
 }
 
-variable "target_instance_id" {
-  type = string
-  description = "ID of the EC2 instance to attach to the target group"
+variable "nodejs_app1_id" {
+  type        = string
+  description = "ID of the first Node.js app EC2 instance"
+}
+
+variable "nodejs_app2_id" {
+  type        = string
+  description = "ID of the second Node.js app EC2 instance"
 }
 
 

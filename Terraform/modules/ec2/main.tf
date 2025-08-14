@@ -58,11 +58,11 @@ resource "aws_instance" "jenkins_master" {
   }
 }
 
-# Jenkins Slave Instance in Private Subnet ( Same as the one on which will the App be deployed )
+# Jenkins Slave Instance in Private Subnet
 resource "aws_instance" "jenkins_slave" {
-  ami = data.aws_ami.ubuntu.id
+  ami= data.aws_ami.ubuntu.id
   instance_type = var.instance_type
-  subnet_id = var.private_subnet_ids[1]
+  subnet_id = var.private_subnet_ids[0]
   private_ip = var.slave_private_ip
   key_name  = aws_key_pair.ec2_key.key_name
   vpc_security_group_ids = [
@@ -71,5 +71,33 @@ resource "aws_instance" "jenkins_slave" {
   ]
   tags = {
     Name = "${var.prefix}-jenkins-slave"
+  }
+}
+
+# App Instance 1 in private subnet 1
+resource "aws_instance" "nodejs_app1" {
+  ami  = data.aws_ami.ubuntu.id
+  instance_type = var.instance_type
+  subnet_id  = var.private_subnet_ids[0]
+  key_name  = aws_key_pair.ec2_key.key_name
+  vpc_security_group_ids  = [var.app_sg_id]
+  associate_public_ip_address = false
+
+  tags = {
+    Name = "${var.prefix}-app1"
+  }
+}
+
+# App Instance 2 in private subnet 2
+resource "aws_instance" "nodejs_app2" {
+  ami  = data.aws_ami.ubuntu.id
+  instance_type = var.instance_type
+  subnet_id  = var.private_subnet_ids[1]
+  key_name  = aws_key_pair.ec2_key.key_name
+  vpc_security_group_ids  = [var.app_sg_id]
+  associate_public_ip_address = false
+
+  tags = {
+    Name = "${var.prefix}-app2"
   }
 }

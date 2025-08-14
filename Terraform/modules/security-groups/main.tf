@@ -59,7 +59,7 @@ resource "aws_security_group" "slave_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    security_groups = [aws_security_group.bastion_sg.id, aws_security_group.master_sg.id]
+    security_groups = [aws_security_group.bastion_sg.id]
   }
 
   # Outbound rule to allow all traffic
@@ -77,12 +77,22 @@ resource "aws_security_group" "app_sg" {
   description = "App EC2 SG"
   vpc_id = var.vpc_id
 
+  # Allow http traffic from ALB only
   ingress {
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
-    security_groups = [aws_security_group.alb_sg.id]  # Allow traffic from ALB only
+    security_groups = [aws_security_group.alb_sg.id]  
     }
+  
+  # SSH from Jenkins Slave SG
+  ingress {
+    from_port       = 22
+    to_port         = 22
+    protocol        = "tcp"
+    security_groups = [aws_security_group.slave_sg.id]
+    description     = "Allow SSH from Jenkins Slave"
+  }
 
   egress {
     from_port   = 0
