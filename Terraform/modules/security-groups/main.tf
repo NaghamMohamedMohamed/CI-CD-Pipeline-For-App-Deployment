@@ -28,7 +28,7 @@ resource "aws_security_group" "bastion_sg" {
 # Security Group for Jenkins Master Server
 resource "aws_security_group" "master_sg" {
   name        = "${var.prefix}-jenkins-master-sg"
-  description = "Allow web/SSH access to Jenkins"
+  description = "Allow web/SSH access to Jenkins Master from Bastion"
   vpc_id      = var.vpc_id
 
   # Allow SSH access (port 22) only from the bastion security group
@@ -51,7 +51,7 @@ resource "aws_security_group" "master_sg" {
 # Security Group for Jenkins Slave
 resource "aws_security_group" "slave_sg" {
   name        = "${var.prefix}-jenkins-slave-sg"
-  description = "Allow HTTP from Bastion EC2"
+  description = "Allow web/SSH access to Jenkins Slave from Bastion"
   vpc_id      = var.vpc_id
 
   # Inbound rule To Allow SSH access (port 22) only from the bastion security group
@@ -83,6 +83,7 @@ resource "aws_security_group" "app_sg" {
     to_port         = 80
     protocol        = "tcp"
     security_groups = [aws_security_group.alb_sg.id]  
+    description     = "Allow HTTP traffic from the internet"
     }
   
   # SSH from Jenkins Slave SG
