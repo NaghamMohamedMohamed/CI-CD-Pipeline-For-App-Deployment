@@ -62,6 +62,14 @@ resource "aws_security_group" "slave_sg" {
     security_groups = [aws_security_group.bastion_sg.id]
   }
 
+  # Inbound rule To Allow SSH access (port 22) only from the bastion security group
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    security_groups = [aws_security_group.master_sg.id]
+  }
+
   # Outbound rule to allow all traffic
   egress {
     from_port   = 0
