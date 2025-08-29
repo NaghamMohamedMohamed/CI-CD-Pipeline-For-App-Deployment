@@ -1,0 +1,26 @@
+pipeline {
+    agent { label 'nodejs-slave' }
+    environment {
+        SLACK_CHANNEL = '#jenkins-pipelines'
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Run Ansible Playbook For App Deployment') {
+            steps {
+                ansible playbook -i inventory.ini Ansible/playbooks/deploy_nodejs_app.yml
+            }
+        }
+    }
+    post {
+        success {
+        slackSend channel: env.SLACK_CHANNEL, message: "✅ Pipeline SUCCESS : ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|console>)"
+        }
+        failure {
+        slackSend channel: env.SLACK_CHANNEL, message: "❌ Pipeline FAILED : ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|console>)"
+        }
+    }
+}
